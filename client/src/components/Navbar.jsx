@@ -2,11 +2,12 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon, } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react';
 import { IoChevronDownOutline } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 
 const navigation = [
-    { name: 'Home', href: '#', current: true },
+    { name: 'Home', href: '/', current: true },
     { name: 'Product&Features', href: '#', current: false },
-    { name: 'Contact', href: '#', current: false },
+    { name: 'Contact', href: '', current: false },
 ]
 
 function classNames(...classes) {
@@ -17,6 +18,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -66,7 +68,7 @@ export default function Navbar() {
                                                 <div>
                                                     <MenuButton
                                                         className={classNames(
-                                                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                            item.current ? ' text-white' : 'text-gray-300  hover:text-white',
                                                             'rounded-md px-3 py-2 text-sm font-medium',
                                                         )}
                                                     //</div>className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -83,42 +85,68 @@ export default function Navbar() {
                                                 </div>
                                                 <MenuItems
                                                     transition
-                                                    className="absolute left-0 z-10 mt-2 w-64 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                                    className="absolute left-0 z-10 mt-2 w-64 origin-top-right rounded-md bg-slate-800 py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                                                 >
                                                     <MenuItem>
                                                         <div
+                                                            onClick={() => navigate('/products/aupay')}
 
-                                                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                                                            className="block border-b border-slate-600 px-4 py-2 text-sm text-slate-200 data-[focus]:bg-slate-700 cursor-pointer data-[focus]:outline-none"
                                                         >
-                                                            <h3 className='text-base font-semibold' >Au Pays</h3>
-                                                            <p className='text-xs'>Gold saving scheme payment platform</p>
+                                                            <div>
+
+                                                                <h3 className='text-base font-semibold flex gap-2' >  <img className="w-5" src="/symbol.aurumm.svg" /> Au Pay</h3>
+                                                                <p className='text-xs ml-7'>Gold saving scheme payment platform</p>
+                                                            </div>
                                                         </div>
                                                     </MenuItem>
                                                     <MenuItem>
-                                                        <a
-                                                            href="#"
-                                                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                                                        <div
+                                                            onClick={() => navigate('/products/ausales')}
+
+                                                            className="block border-b border-slate-600 px-4 py-2 text-sm text-slate-200 data-[focus]:bg-slate-700 cursor-pointer data-[focus]:outline-none"
                                                         >
-                                                            Settings
-                                                        </a>
+                                                            <div>
+
+                                                                <h3 className='text-base font-semibold flex gap-2' >  <img className="w-5" src="/symbol.aurumm.svg" /> Au Sales</h3>
+                                                                <p className='text-xs ml-7'>Comprehensive Jewellary store ERP</p>
+                                                            </div>
+                                                        </div>
                                                     </MenuItem>
                                                     <MenuItem>
-                                                        <a
-                                                            href="#"
-                                                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                                                        <div
+                                                            onClick={() => navigate('/products/aushop')}
+
+                                                            className="block px-4 py-2 text-sm text-slate-200 data-[focus]:bg-slate-700 cursor-pointer data-[focus]:outline-none"
                                                         >
-                                                            Sign out
-                                                        </a>
+                                                            <div>
+
+                                                                <h3 className='text-base font-semibold flex gap-2' >  <img className="w-5" src="/symbol.aurumm.svg" /> Au Shop</h3>
+                                                                <p className='text-xs ml-7'>Online Jewellary Shopping platform</p>
+                                                            </div>
+                                                        </div>
                                                     </MenuItem>
                                                 </MenuItems>
                                             </Menu>
-                                        </> : <a
+                                        </> :item.name=='Contact'?<a 
                                             key={item.name}
-                                            href={item.href}
+                                            onClick={()=>navigate('/contact')}
+                                                            
                                             aria-current={item.current ? 'page' : undefined}
                                             className={classNames(
-                                                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                                'rounded-md px-3 py-2 text-sm font-medium',
+                                                item.current ? ' text-gray-300 cursor-pointer' : 'text-gray-300 hover:text-white',
+                                                'rounded-md px-3 py-2 text-sm font-medium cursor-pointer',
+                                            )}
+                                        >
+                                            {item.name}
+                                        </a> : <a 
+                                            key={item.name}
+                                            onClick={()=>navigate('/')}
+                                                            
+                                            aria-current={item.current ? 'page' : undefined}
+                                            className={classNames(
+                                                item.current ? ' text-gray-300 cursor-pointer' : 'text-gray-300 hover:text-white',
+                                                'rounded-md px-3 py-2 text-sm font-medium cursor-pointer',
                                             )}
                                         >
                                             {item.name}
@@ -130,7 +158,7 @@ export default function Navbar() {
                         </div>
                     </div>
                     <div className="absolute   inset-y-0 right-0  flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <button className='bg-gradient-to-r from-[#66AA74]  to-[#D7B56D] px-5 font-semibold hover:bg-gradient-to-l hover:from-[#518d5d]  hover:to-[#ac9155] py-2 rounded-[17px] text-sm' >
+                        <button onClick={()=>navigate('/contact')} className='bg-gradient-to-r from-[#66AA74]  to-[#D7B56D] px-5 font-semibold hover:bg-gradient-to-l hover:from-[#518d5d]  hover:to-[#ac9155] py-2 rounded-[17px] text-sm' >
                             Get a Free Demo
                         </button>
                         {/* <button
@@ -192,7 +220,7 @@ export default function Navbar() {
 
             <DisclosurePanel className="sm:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2">
-                    {navigation.map((item) => (
+                    {/* {navigation.map((item) => (
                         <DisclosureButton
                             key={item.name}
                             as="a"
@@ -205,7 +233,97 @@ export default function Navbar() {
                         >
                             {item.name}
                         </DisclosureButton>
-                    ))}
+                    ))} */}
+                    {navigation.map((item) => (
+                                        item.name == "Product&Features" ? <>
+                                            <Menu as="div" className="relative">
+                                                <div>
+                                                    <MenuButton
+                                                        className={classNames(
+                                                            item.current ? ' text-white' : 'text-gray-300  hover:text-white',
+                                                            'rounded-md px-3 py-2 text-sm font-medium',
+                                                        )}
+                                                    //</div>className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                                    >
+                                                        <span className="absolute -inset-1.5" />
+                                                        <span className="sr-only">Open user menu</span>
+                                                        {/* <img
+                                                            alt=""
+                                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                            className="size-8 rounded-full"
+                                                        /> */}
+                                                        <div className='flex gap-2 items-center' > {item.name} <IoChevronDownOutline /></div>
+                                                    </MenuButton>
+                                                </div>
+                                                <MenuItems
+                                                    transition
+                                                    className="absolute left-0 z-10 mt-2 w-64 origin-top-right rounded-md bg-slate-800 py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                                >
+                                                    <MenuItem>
+                                                        <div
+                                                            onClick={() => navigate('/products/aupay')}
+
+                                                            className="block border-b border-slate-600 px-4 py-2 text-sm text-slate-200 data-[focus]:bg-slate-700 cursor-pointer data-[focus]:outline-none"
+                                                        >
+                                                            <div>
+
+                                                                <h3 className='text-base font-semibold flex gap-2' >  <img className="w-5" src="/symbol.aurumm.svg" /> Au Pay</h3>
+                                                                <p className='text-xs ml-7'>Gold saving scheme payment platform</p>
+                                                            </div>
+                                                        </div>
+                                                    </MenuItem>
+                                                    <MenuItem>
+                                                        <div
+                                                            onClick={() => navigate('/products/ausales')}
+
+                                                            className="block border-b border-slate-600 px-4 py-2 text-sm text-slate-200 data-[focus]:bg-slate-700 cursor-pointer data-[focus]:outline-none"
+                                                        >
+                                                            <div>
+
+                                                                <h3 className='text-base font-semibold flex gap-2' >  <img className="w-5" src="/symbol.aurumm.svg" /> Au Sales</h3>
+                                                                <p className='text-xs ml-7'>Comprehensive Jewellary store ERP</p>
+                                                            </div>
+                                                        </div>
+                                                    </MenuItem>
+                                                    <MenuItem>
+                                                        <div
+                                                            onClick={() => navigate('/products/aushop')}
+
+                                                            className="block px-4 py-2 text-sm text-slate-200 data-[focus]:bg-slate-700 cursor-pointer data-[focus]:outline-none"
+                                                        >
+                                                            <div>
+
+                                                                <h3 className='text-base font-semibold flex gap-2' >  <img className="w-5" src="/symbol.aurumm.svg" /> Au Shop</h3>
+                                                                <p className='text-xs ml-7'>Online Jewellary Shopping platform</p>
+                                                            </div>
+                                                        </div>
+                                                    </MenuItem>
+                                                </MenuItems>
+                                            </Menu>
+                                        </> :item.name=='Contact'?<a 
+                                            key={item.name}
+                                            onClick={()=>navigate('/contact')}
+                                                            
+                                            aria-current={item.current ? 'page' : undefined}
+                                            className={classNames(
+                                                item.current ? ' text-gray-300 cursor-pointer' : 'text-gray-300 hover:text-white',
+                                                'rounded-md px-3 py-2 text-sm font-medium cursor-pointer',
+                                            )}
+                                        >
+                                            {item.name}
+                                        </a> : <a 
+                                            key={item.name}
+                                            onClick={()=>navigate('/')}
+                                                            
+                                            aria-current={item.current ? 'page' : undefined}
+                                            className={classNames(
+                                                item.current ? ' text-gray-300 cursor-pointer' : 'text-gray-300 hover:text-white',
+                                                'rounded-md px-3 py-2 text-sm font-medium cursor-pointer',
+                                            )}
+                                        >
+                                            {item.name}
+                                        </a>
+                                    ))}
                 </div>
             </DisclosurePanel>
         </Disclosure>
